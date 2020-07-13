@@ -336,7 +336,7 @@ class KnapsackSearchNode {
   KnapsackSearchNode(const KnapsackSearchNode* const parent,
                      const KnapsackAssignment& assignment);
   int depth() const { return depth_; }
-  const KnapsackSearchNode* const parent() const { return parent_; }
+  const KnapsackSearchNode* parent() const { return parent_; }
   const KnapsackAssignment& assignment() const { return assignment_; }
 
   int64 current_profit() const { return current_profit_; }
@@ -417,7 +417,7 @@ class KnapsackState {
   // to an already assigned item.
   bool UpdateState(bool revert, const KnapsackAssignment& assignment);
 
-  int GetNumberOfItems() const { return is_bound_.size(); }
+  int GetNumberOfItems() const { return static_cast<int>(is_bound_.size()); }
   bool is_bound(int id) const { return is_bound_.at(id); }
   bool is_in(int id) const { return is_in_.at(id); }
 

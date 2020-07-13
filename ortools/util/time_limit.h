@@ -249,7 +249,7 @@ class TimeLimit {
    * Returns the time elapsed in seconds since the construction of this object.
    */
   double GetElapsedTime() const {
-    return 1e-9 * (absl::GetCurrentTimeNanos() - start_ns_);
+    return 1e-9 * static_cast<double>(absl::GetCurrentTimeNanos() - start_ns_);
   }
 
   /**
@@ -496,7 +496,7 @@ inline void TimeLimit::ResetTimers(double limit_in_seconds,
 #endif  // HAS_PERF_SUBSYSTEM
   start_ns_ = absl::GetCurrentTimeNanos();
   last_ns_ = start_ns_;
-  limit_ns_ = limit_in_seconds >= 1e-9 * (kint64max - start_ns_)
+  limit_ns_ = limit_in_seconds >= 1e-9 * static_cast<double>(kint64max - start_ns_)
                   ? kint64max
                   : static_cast<int64>(limit_in_seconds * 1e9) + start_ns_;
 }
@@ -574,7 +574,7 @@ inline double TimeLimit::GetTimeLeft() const {
   if (FLAGS_time_limit_use_usertime) {
     return std::max(limit_in_seconds_ - user_timer_.Get(), 0.0);
   } else {
-    return delta_ns * 1e-9;
+    return static_cast<double>(delta_ns) * 1e-9;
   }
 }
 

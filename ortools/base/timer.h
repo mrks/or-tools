@@ -42,7 +42,7 @@ class WallTimer {
       running_ = false;
     }
   }
-  double Get() const { return GetNanos() * 1e-9; }
+  double Get() const { return static_cast<double>(GetNanos()) * 1e-9; }
   int64 GetInMs() const { return GetNanos() / 1000000; }
   int64 GetInUsec() const { return GetNanos() / 1000; }
   inline absl::Duration GetDuration() const {
@@ -82,7 +82,7 @@ typedef CycleTimer SimpleCycleTimer;
 class CycleTimerBase {
  public:
   static int64 SecondsToCycles(double s) { return static_cast<int64>(s * 1e9); }
-  static double CyclesToSeconds(int64 c) { return c * 1e-9; }
+  static double CyclesToSeconds(int64 c) { return static_cast<double>(c) * 1e-9; }
   static int64 CyclesToMs(int64 c) { return c / 1000000; }
   static int64 CyclesToUsec(int64 c) { return c / 1000; }
 };

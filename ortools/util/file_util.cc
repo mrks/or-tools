@@ -97,6 +97,10 @@ bool WriteProtoToFile(absl::string_view filename,
         return false;
       }
       break;
+    case ProtoWriteFormat::kJson:
+      LOG(ERROR) << "JSON not supported.";
+      return false;
+      break;
   }
   std::string output_filename(filename);
   if (append_extension_to_file_name) output_filename += file_type_suffix;
